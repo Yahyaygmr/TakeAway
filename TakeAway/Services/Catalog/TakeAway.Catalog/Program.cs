@@ -1,9 +1,19 @@
+using TakeAway.Catalog.Services.CategoryServices;
+using TakeAway.Catalog.Services.DailyDiscountServices;
+using TakeAway.Catalog.Services.ProductServices;
+using TakeAway.Catalog.Services.SliderServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IDailyDiscountService, DailyDiscountService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ISliderService, SliderService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
