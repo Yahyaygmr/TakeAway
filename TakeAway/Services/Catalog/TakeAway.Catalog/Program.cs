@@ -2,12 +2,15 @@ using TakeAway.Catalog.Services.CategoryServices;
 using TakeAway.Catalog.Services.DailyDiscountServices;
 using TakeAway.Catalog.Services.ProductServices;
 using TakeAway.Catalog.Services.SliderServices;
+using TakeAway.Catalog.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IDatabaseSettings, DatabaseSettings>();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IDailyDiscountService, DailyDiscountService>();
