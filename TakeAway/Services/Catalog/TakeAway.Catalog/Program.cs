@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Options;
+using System.Reflection;
 using TakeAway.Catalog.Services.CategoryServices;
 using TakeAway.Catalog.Services.DailyDiscountServices;
 using TakeAway.Catalog.Services.ProductServices;
@@ -8,15 +10,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-
-builder.Services.AddScoped<IDatabaseSettings, DatabaseSettings>();
-
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IDailyDiscountService, DailyDiscountService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISliderService, SliderService>();
 
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
+builder.Services.AddScoped<IDatabaseSettings>(sp =>
+{
+    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+});
+
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

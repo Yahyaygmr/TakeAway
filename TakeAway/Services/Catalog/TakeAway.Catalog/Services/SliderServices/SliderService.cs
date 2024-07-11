@@ -1,32 +1,54 @@
-﻿using TakeAway.Catalog.Dtos.SliderDtos;
+﻿using AutoMapper;
+using MongoDB.Driver;
+using TakeAway.Catalog.Dtos.SliderDtos;
+using TakeAway.Catalog.Entities;
+using TakeAway.Catalog.Settings;
 
 namespace TakeAway.Catalog.Services.SliderServices
 {
     public class SliderService : ISliderService
     {
-        public Task CreateSliderAsync(CreateSliderDto dto)
+        private readonly IMongoCollection<Slider> _sliderCollection;
+        private readonly IMapper _mapper;
+
+        public SliderService(IMapper mapper, IDatabaseSettings databaseSettings)
         {
-            throw new NotImplementedException();
+            _mapper = mapper;
+            var client = new MongoClient(databaseSettings.ConnectionString);
+            var database = client.GetDatabase(databaseSettings.DatabaseName);
+            _sliderCollection = database.GetCollection<Slider>(databaseSettings.SliderCollectionName);
+
         }
 
-        public Task DeleteSliderAsync(string id)
+        public async Task CreateSliderAsync(CreateSliderDto dto)
         {
-            throw new NotImplementedException();
+            var value = _mapper.Map<Slider>(dto);
+            await _sliderCollection.InsertOneAsync(value);
         }
 
-        public Task<List<ResultSliderDto>> GetAllSliderAsync()
+        public async Task DeleteSliderAsync(string id)
         {
-            throw new NotImplementedException();
+            await _sliderCollection.DeleteOneAsync(x => x.SliderId == id);
         }
 
-        public Task<GetByIdSliderDto> GetByIdSliderAsync(string id)
+        public async Task<List<ResultSliderDto>> GetAllSliderAsync()
         {
-            throw new NotImplementedException();
+            var values = await _sliderCollection.Find(x => true).ToListAsync();
+            return _mapper.Map<List<ResultSliderDto>>(values);
+
         }
 
-        public Task UpdateSliderAsync(UpdateSliderDto dto)
+        public async Task<GetByIdSliderDto> GetByIdSliderAsync(string id)
         {
-            throw new NotImplementedException();
+            var values = await _sliderCollection.Find<Slider>(x => x.SliderId == id).FirstOrDefaultAsync();
+            return _mapper.Map<GetByIdSliderDto>(values);
+        }
+
+        public async Task UpdateSliderAsync(UpdateSliderDto dto)
+        {
+            var values = _mapper.Map<Slider>(dto);
+            await _sliderCollection.FindOneAndReplaceAsync(x => x.SliderId == dto.SliderId, values);
         }
     }
 }
+
