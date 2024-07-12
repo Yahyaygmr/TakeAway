@@ -16,10 +16,10 @@ namespace TakeAway.Discount.Context
             _connectionString = _configuration.GetConnectionString("connection");
         }
         public IDbConnection CreateConnection() => new SqlConnection(_connectionString);
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("server=DESKTOP-4QIIH5S;database=TakeAwayDiscount;integrated security=true;TrustServerCertificate=true;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("server=DESKTOP-4QIIH5S;database=TakeAwayDiscount;integrated security=true;TrustServerCertificate=true;");
+        //}
         public DbSet<Coupon> Coupons { get; set; }
     }
 }

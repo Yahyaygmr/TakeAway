@@ -46,8 +46,8 @@ namespace TakeAway.Discount.Services.CouponServices
             parameters.Add("@couponId", id);
 
             var connection = _discountContext.CreateConnection();
-            var values = await connection.QueryFirstOrDefaultAsync<GetByIdCouponDto>(query);
-            return values;
+            var value = await connection.QueryFirstOrDefaultAsync<GetByIdCouponDto>(query, parameters);
+            return value;
         }
 
         public async Task<List<ResultCouponDto>> GetListCouponsAsync()
@@ -61,7 +61,7 @@ namespace TakeAway.Discount.Services.CouponServices
 
         public async Task UpdateCouponAsync(UpdateCouponDto dto)
         {
-            string query = "Update Coupons Set Code=@code Rate=@rate IsActive=@isActive Where CouponId=@couponId";
+            string query = "Update Coupons Set Code=@code, Rate=@rate, IsActive=@isActive Where CouponId=@couponId";
             var parameters = new DynamicParameters();
             parameters.Add("@code", dto.Code);
             parameters.Add("@rate", dto.Rate);
