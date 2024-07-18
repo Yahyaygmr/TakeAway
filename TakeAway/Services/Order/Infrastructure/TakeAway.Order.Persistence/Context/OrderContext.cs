@@ -16,6 +16,6 @@ namespace TakeAway.Order.Persistence.Context
         }
         public DbSet<Adress> Adreses { get; set; }
         public DbSet<Ordering> Orderings { get; set; }
-        public DbSet<OrderedDetail> OrderedDetails { get; set; }
+        public DbSet<OrderDetail> OrderedDetails { get; set; }
     }
 }
