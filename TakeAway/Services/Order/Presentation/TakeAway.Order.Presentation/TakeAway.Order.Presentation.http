@@ -1,0 +1,6 @@
+@TakeAway.Order.Presentation_HostAddress = http://localhost:5134
+
+GET {{TakeAway.Order.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

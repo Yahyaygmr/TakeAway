@@ -12,7 +12,7 @@ namespace TakeAway.Order.Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=localhost,1440;database=TakeAwayOrderDb;integrated security=true;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("server=DESKTOP-4QIIH5S;database=TakeAwayOrderDb;integrated security=true;TrustServerCertificate=true;");
         }
         public DbSet<Adress> Adreses { get; set; }
         public DbSet<Ordering> Orderings { get; set; }
