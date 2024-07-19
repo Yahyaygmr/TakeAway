@@ -9,11 +9,11 @@ using TakeAway.Order.Domain.Entities;
 
 namespace TakeAway.Order.Application.Features.CQRS.Handlers.OrderDetailHandlers.Write
 {
-    public class DeleteOrderedDetailCommandHandler
+    public class DeleteOrderDetailCommandHandler
     {
         private readonly IRepository<OrderDetail, int> _repository;
 
-        public DeleteOrderedDetailCommandHandler(IRepository<OrderDetail, int> repository)
+        public DeleteOrderDetailCommandHandler(IRepository<OrderDetail, int> repository)
         {
             _repository = repository;
         }

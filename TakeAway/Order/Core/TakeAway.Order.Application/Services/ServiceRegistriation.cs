@@ -11,7 +11,7 @@ namespace TakeAway.Order.Application.Services
 {
     public static class ServiceRegistriation
     {
-        public static void AddApplicationService(this IServiceCollection services)
+        public static void AddApplicationService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistriation).Assembly));
         }
