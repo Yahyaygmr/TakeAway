@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 using TakeAway.IdentityServer.Models;
 
 namespace TakeAway.IdentityServer.Data
