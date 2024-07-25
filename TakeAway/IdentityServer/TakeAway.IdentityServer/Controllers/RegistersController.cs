@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Markup;
+using TakeAway.IdentityServer.Data;
 using TakeAway.IdentityServer.Dtos;
 using TakeAway.IdentityServer.Models;
 
@@ -20,7 +23,8 @@ namespace TakeAway.IdentityServer.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok("Get Başarılı");
+            var values = _userManager.Users.ToList();
+            return Ok(values);
         }
         [HttpPost]
         public async Task<IActionResult> UserRegister(CreateUserRegisterDto dto)
