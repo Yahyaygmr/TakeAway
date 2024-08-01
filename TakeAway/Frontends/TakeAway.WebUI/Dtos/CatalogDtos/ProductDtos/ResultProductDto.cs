@@ -1,6 +1,6 @@
 ﻿namespace TakeAway.WebUI.Dtos.CatalogDtos.ProductDtos
 {
-    public class ResultProductDtos
+    public class ResultProductDto
     {
         public string ProductId { get; set; }
         public string ProductName { get; set; }

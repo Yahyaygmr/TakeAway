@@ -53,7 +53,7 @@ namespace TakeAway.IdentityServer
                 ClientName="TakeAwayVisitorUser",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets= {new Secret("takeawaysecret".Sha256())},
-                AllowedScopes = { "CatalogReadPermission", IdentityServerConstants.LocalApi.ScopeName},
+                AllowedScopes = { "CatalogReadPermission", "CatalogFullPermission", IdentityServerConstants.LocalApi.ScopeName},
                 AllowAccessTokensViaBrowser = true,
             },
             new Client
