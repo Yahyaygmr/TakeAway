@@ -1,4 +1,6 @@
-﻿namespace TakeAway.IdentityServer.Tools
+﻿using System.Collections.Generic;
+
+namespace TakeAway.IdentityServer.Tools
 {
     public class GetCheckAppUserViewModel
     {

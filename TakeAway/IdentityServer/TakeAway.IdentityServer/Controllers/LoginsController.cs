@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using TakeAway.IdentityServer.Dtos;
 using TakeAway.IdentityServer.Models;
@@ -26,11 +27,23 @@ namespace TakeAway.IdentityServer.Controllers
 
             var result = await _signInManager.PasswordSignInAsync(dto.UserName, dto.Password, false, false);
             var user = await _userManager.FindByNameAsync(dto.UserName);
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var userRole = "";
+            if (userRoles.Count > 0)
+            {
+                userRole = userRoles[0];
+            }
+            else
+            {
+                userRole = "Henüz Rol Ataması Yapılamamış.";
+            }
+
+
             if (result.Succeeded)
             {
                 GetCheckAppUserViewModel model = new GetCheckAppUserViewModel();
                 model.UserName = dto.UserName;
-                model.Role = "Rol 1";
+                model.Role = userRole;
                 model.Id = user.Id;
                 var token = JwtTokenGenerator.GenerateToken(model);
 
